@@ -8,10 +8,20 @@ namespace Homework8
 {
     class DynamicQueue<T> : DynamicArray<T>, IMyQueue<T> 
     {
+        private int MaxSize = 39;
 
         public void Enqueue(T ElementToEnqueue)
         {
-            Add(ElementToEnqueue);
+            if (Size < MaxSize)
+            {
+                Add(ElementToEnqueue);
+            }
+            else 
+            {
+                Console.WriteLine("Buffer is Full");
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
         }
 
         public T Dequeue()

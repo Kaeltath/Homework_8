@@ -8,10 +8,21 @@ namespace Homework8
 {
     class DynamicStack<T>:  DynamicArray<T>, IMyStack<T>
     {
+        private int MaxSize = 79;
 
         public void Push(T toPushValue)
-        {
-            Add(toPushValue);
+        {           
+
+            if (Size < MaxSize)
+            {
+                Add(toPushValue);
+            }
+            else
+            {
+                Console.WriteLine("Buffer is Full");
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
         }
 
         public T Pop()

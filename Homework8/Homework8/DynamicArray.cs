@@ -8,31 +8,23 @@ namespace Homework8
 {
     class DynamicArray<T> : Buffer<T>
     {
-        private int maxBufferSize = 100;
         private int minBufferSize = 5;
 
-        protected void Add(T element) 
+       protected void Add(T element) 
         {
             counter++;
             if (IsFull()) 
             {
                 _capacity = _capacity * 2;
-                if (_capacity < maxBufferSize)
-                {
+                
                     T[] tempArray = new T[_capacity];
                     for (int i = 0; i < dynamicArray.Length; i++)
                     {
                         tempArray[i] = dynamicArray[i];
                     }
                     dynamicArray = tempArray;
-                    dynamicArray[counter - 1] = element;
-                }
-                else 
-                {
-                    Console.WriteLine("Stack Overflow");
-                    Console.ReadLine();
-                    Environment.Exit(0);
-                }
+                    dynamicArray[counter - 1] = element;               
+              
             }
 
             dynamicArray[counter-1] = element;            
@@ -44,8 +36,7 @@ namespace Homework8
             if (IsFull())
             {
                 _capacity = _capacity * 2;
-                if (_capacity < maxBufferSize)
-                {
+                
                     T[] tempArray = new T[_capacity];
                     for (int i = 0; i < dynamicArray.Length; i++)
                     {
@@ -58,14 +49,7 @@ namespace Homework8
                         dynamicArray[k] = dynamicArray[k - 1];
                     }
                     dynamicArray[index] = element;
-                }
-                else 
-                {
-                    Console.WriteLine("Stack Overflow");
-                    Console.ReadLine();
-                    Environment.Exit(0);
-                }
-
+                            
             }
             
             for (int k = counter; k >= index; k--)
@@ -107,9 +91,7 @@ namespace Homework8
                         tempArray[i] = dynamicArray[i];
                     }
                     dynamicArray = tempArray;
-
                 }
-
             }
             for (int k = index; k < counter; k++)
             {
