@@ -10,57 +10,28 @@ namespace Homework8
     {
         private int minBufferSize = 5;
 
-       protected void Add(T element) 
+       public void Add(T element) 
         {
             counter++;
             if (IsFull()) 
             {
-                _capacity = _capacity * 2;
-                
-                    T[] tempArray = new T[_capacity];
-                    for (int i = 0; i < dynamicArray.Length; i++)
-                    {
-                        tempArray[i] = dynamicArray[i];
-                    }
-                    dynamicArray = tempArray;
-                    dynamicArray[counter - 1] = element;               
-              
+                Expand();              
             }
 
             dynamicArray[counter-1] = element;            
         }
 
-        public void Insert(T element, int index) 
-        {
-            counter++;           
-            if (IsFull())
-            {
-                _capacity = _capacity * 2;
-                
-                    T[] tempArray = new T[_capacity];
-                    for (int i = 0; i < dynamicArray.Length; i++)
-                    {
-                        tempArray[i] = dynamicArray[i];
-                    }
-                    dynamicArray = tempArray;
+       public void Insert(T element, int index)
+       {
+           counter++;
+           if (IsFull())
+           {
+               Expand();
+           }
+           dynamicArray[index] = element;  
+       }
 
-                    for (int k = counter; k >= index; k--)
-                    {
-                        dynamicArray[k] = dynamicArray[k - 1];
-                    }
-                    dynamicArray[index] = element;
-                            
-            }
-            
-            for (int k = counter; k >= index; k--)
-            {
-                dynamicArray[k] = dynamicArray[k-1];
-            }
-            dynamicArray[index] = element;
-
-        }
-
-        protected T Get(int index) 
+        public T Get(int index) 
         {
             if (IsEmpty()) 
             {
@@ -72,7 +43,7 @@ namespace Homework8
             
         }
 
-        protected void Remove(int index) 
+        public void Remove(int index) 
         {
             if (index >= counter)
             {
@@ -82,16 +53,7 @@ namespace Homework8
             counter--;
             if (counter * 4 < _capacity)
             {
-                if (_capacity > minBufferSize)
-                {
-                    _capacity = _capacity / 2;
-                    T[] tempArray = new T[_capacity];
-                    for (int i = 0; i <= counter; i++)
-                    {
-                        tempArray[i] = dynamicArray[i];
-                    }
-                    dynamicArray = tempArray;
-                }
+                Shrink();
             }
             for (int k = index; k < counter; k++)
             {
@@ -108,6 +70,32 @@ namespace Homework8
             get { return counter-1; }
         }
 
+        private void Expand()
+        {
+        _capacity = _capacity * 2;
+                
+                    T[] tempArray = new T[_capacity];
+                    for (int i = 0; i < dynamicArray.Length; i++)
+                    {
+                        tempArray[i] = dynamicArray[i];
+                    }
+                    dynamicArray = tempArray;
+                    
+        }
+
+        private void Shrink ()
+        {
+             if (_capacity > minBufferSize)
+                {
+                    _capacity = _capacity / 2;
+                    T[] tempArray = new T[_capacity];
+                    for (int i = 0; i <= counter; i++)
+                    {
+                        tempArray[i] = dynamicArray[i];
+                    }
+                    dynamicArray = tempArray;
+                }        
+        }
 
     }
 }

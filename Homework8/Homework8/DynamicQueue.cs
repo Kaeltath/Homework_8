@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace Homework8
 {
-    class DynamicQueue<T> : DynamicArray<T>, IMyQueue<T> 
+    class DynamicQueue<T> : Buffer<T>, IMyQueue<T> , IPrintable
     {
         private int MaxSize = 39;
+        DynamicArray<T> Buffer = new DynamicArray<T>();
+       
 
         public void Enqueue(T ElementToEnqueue)
         {
-            if (Size < MaxSize)
+            if (Buffer.Size < MaxSize)
             {
-                Add(ElementToEnqueue);
+                Buffer.Add(ElementToEnqueue);
             }
             else 
             {
@@ -26,8 +28,8 @@ namespace Homework8
 
         public T Dequeue()
         {
-            T temp = Get(0);
-            Remove(0);
+            T temp = Buffer.Get(0);
+            Buffer.Remove(0);
             return temp;
         }
     }
