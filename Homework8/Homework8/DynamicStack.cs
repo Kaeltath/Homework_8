@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Homework8
 {
-    class DynamicStack<T> : Buffer<T>, IMyQueue<T>
+    class DynamicStack<T> : Buffer<T>, IMyStack<T>
     {
         private int MaxSize = 79;
         DynamicArray<T> Buffer = new DynamicArray<T>();
@@ -29,14 +29,14 @@ namespace Homework8
         public T Pop()
         {
             T temp;
-            temp = Buffer.Get(counter - 1);
-            Buffer.Remove(counter - 1);
+            temp = Buffer.Get(Buffer.Size );
+            Buffer.Remove(Buffer.Size );
             return temp;
         }
 
         public T Peek()
         {
-            return Buffer.Get(counter - 1);
+            return Buffer.Get(Buffer.Size );
         }
     }
 }
